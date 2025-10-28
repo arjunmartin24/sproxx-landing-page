@@ -15,6 +15,7 @@ const Hero = () => {
           <p className="text-xl md:text-2xl text-gray-700 mb-12 max-w-3xl mx-auto leading-relaxed animate-fade-in-delay">
             Protect your margin and detect vendor price leaks before they reach your ERP.<br />
             Sproxx gives buyers the clarity and control they deserve.
+            PREPARED TO BE AWESTRUCK
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in-delay-2">
             <a 
