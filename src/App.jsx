@@ -1,4 +1,5 @@
 import React from 'react';
+import { Analytics } from "@vercel/analytics/react";
 import Hero from './components/Hero';
 import Features from './components/Features';
 import DemoSection from './components/DemoSection';
@@ -21,6 +22,7 @@ function App() {
         <DemoSection />
         <FAQ />
         <Footer />
+        <Analytics />
       </div>
     </div>
   );
