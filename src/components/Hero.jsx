@@ -10,10 +10,10 @@ const Hero = () => {
       <div className="container mx-auto px-4 text-center">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-6xl md:text-7xl font-bold mb-8 bg-gradient-to-r from-purple-600 to-purple-400 bg-clip-text text-transparent animate-fade-in">
-            Supply Chain Armor for P21
+            Supply Chain Armor for P21 (work in progress)
           </h1>
           <p className="text-xl md:text-2xl text-gray-700 mb-12 max-w-3xl mx-auto leading-relaxed animate-fade-in-delay">
-            Protect your margins and detect vendor price leaks before they reach your ERP.<br />
+            Protect your ASS and detect vendor price leaks before they reach your ERP.<br />
             Sproxx gives buyers the clarity and control they deserve.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in-delay-2">
