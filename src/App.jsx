@@ -70,7 +70,8 @@ export default function App() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 1 }}
-          className="text-black text-lg max-w-3xl mt-6 leading-relaxed"
+          style={{ color: "#000000", opacity: 1 }}
+          className="text-lg max-w-3xl mt-6 leading-relaxed font-medium"
         >
           Monitor vendor behavior, detect hidden cost drifts, and safeguard your purchasing margins — all before it impacts your ERP.
         </motion.p>
