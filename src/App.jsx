@@ -1,6 +1,6 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useEffect, useRef } from "react";
-import './index.css';
+import "./index.css";
 
 export default function App() {
   const ref = useRef(null);
@@ -27,7 +27,7 @@ export default function App() {
       particles.forEach(p => {
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(100,180,255,0.15)";
+        ctx.fillStyle = "rgba(100,180,255,0.1)";
         ctx.fill();
         p.x += p.dx;
         p.y += p.dy;
@@ -40,16 +40,16 @@ export default function App() {
   }, []);
 
   return (
-    <div ref={ref} className="relative min-h-screen overflow-hidden bg-[#07080A] text-white">
+    <div ref={ref} className="relative min-h-screen overflow-hidden bg-[#050608] text-white selection:bg-cyan-400/20 selection:text-cyan-300">
       {/* Background effects */}
       <canvas id="particleCanvas" className="absolute inset-0 z-0"></canvas>
 
-      {/* Subtle animated background gradient */}
+      {/* Animated background glow */}
       <motion.div
         style={{ y }}
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[900px] bg-gradient-to-r from-indigo-600/25 to-cyan-400/25 blur-[200px] rounded-full z-0"
-        animate={{ scale: [1, 1.15, 1], opacity: [0.7, 1, 0.7] }}
-        transition={{ duration: 10, repeat: Infinity }}
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[900px] bg-gradient-to-r from-cyan-500/20 via-indigo-700/20 to-purple-700/20 blur-[250px] rounded-full z-0"
+        animate={{ scale: [1, 1.15, 1], opacity: [0.6, 1, 0.6] }}
+        transition={{ duration: 12, repeat: Infinity }}
       />
 
       {/* Hero Section */}
@@ -58,7 +58,7 @@ export default function App() {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
-          className="text-5xl sm:text-6xl md:text-7xl font-extrabold bg-gradient-to-r from-[#7C4DFF] via-[#4FC3F7] to-[#4FC3F7] bg-clip-text text-transparent drop-shadow-[0_0_15px_#4FC3F7]"
+          className="text-5xl sm:text-6xl md:text-7xl font-extrabold bg-gradient-to-r from-[#60A5FA] via-[#80D0C7] to-[#A78BFA] bg-clip-text text-transparent drop-shadow-[0_0_20px_rgba(79,195,247,0.4)]"
         >
           The AI Watchdog for Supply Chain Integrity
         </motion.h1>
@@ -67,7 +67,7 @@ export default function App() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 1 }}
-          className="text-gray-300 text-lg max-w-3xl mt-6 leading-relaxed"
+          className="text-gray-400 text-lg max-w-3xl mt-6 leading-relaxed"
         >
           Monitor vendor behavior, detect hidden cost drifts, and safeguard your purchasing margins — all before it impacts your ERP.
         </motion.p>
@@ -80,13 +80,13 @@ export default function App() {
         >
           <a
             href="https://app.sproxx.io"
-            className="px-8 py-4 bg-gradient-to-r from-[#6C63FF] to-[#4FC3F7] rounded-lg text-white font-semibold shadow-lg hover:shadow-[#4FC3F7]/40 transition-all hover:-translate-y-1"
+            className="px-8 py-4 bg-gradient-to-r from-[#3B82F6] to-[#06B6D4] rounded-lg text-white font-semibold shadow-lg hover:shadow-cyan-400/40 transition-all hover:-translate-y-1"
           >
             Launch Platform
           </a>
           <a
             href="#features"
-            className="px-8 py-4 border border-[#4FC3F7] text-[#4FC3F7] rounded-lg font-semibold hover:bg-[#4FC3F7]/10 transition-all hover:-translate-y-1"
+            className="px-8 py-4 border border-cyan-400 text-cyan-300 rounded-lg font-semibold hover:bg-cyan-400/10 transition-all hover:-translate-y-1"
           >
             Learn More
           </a>
@@ -100,7 +100,7 @@ export default function App() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-4xl md:text-5xl font-semibold mb-16 bg-gradient-to-r from-amber-300 to-pink-500 bg-clip-text text-transparent"
+          className="text-4xl md:text-5xl font-semibold mb-16 bg-gradient-to-r from-amber-300 to-pink-400 bg-clip-text text-transparent drop-shadow-[0_0_15px_rgba(249,168,212,0.3)]"
         >
           Powering Next-Gen Procurement Teams
         </motion.h2>
@@ -129,10 +129,10 @@ export default function App() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.2, duration: 0.9 }}
               viewport={{ once: true }}
-              className="bg-[#0C0E13] border border-[#1A1C24] rounded-3xl p-10 shadow-lg hover:shadow-[#4FC3F7]/30 transition-all hover:-translate-y-2 backdrop-blur-md"
+              className="bg-[#0A0C11] border border-[#1B1E26] rounded-3xl p-10 shadow-md hover:shadow-cyan-400/30 transition-all hover:-translate-y-2 backdrop-blur-lg"
             >
               <div className="text-4xl mb-4">{f.icon}</div>
-              <h3 className="text-2xl font-semibold text-[#4FC3F7] mb-3">{f.title}</h3>
+              <h3 className="text-2xl font-semibold text-cyan-300 mb-3">{f.title}</h3>
               <p className="text-gray-400 text-base">{f.desc}</p>
             </motion.div>
           ))}
