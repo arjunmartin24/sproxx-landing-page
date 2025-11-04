@@ -1,7 +1,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useEffect, useRef } from "react";
 import "./index.css";
-import Hero from "./components/Hero";
+/*import Hero from "./components/Hero";*/
 
 
 export default function App() {
@@ -42,7 +42,7 @@ export default function App() {
   }, []);
 
   return (
-    <Hero />
+    
     <div ref={ref} className="relative min-h-screen overflow-hidden bg-white text-black selection:bg-cyan-100 selection:text-cyan-600">
       {/* Background effects */}
       <canvas id="particleCanvas" className="absolute inset-0 z-0"></canvas>
