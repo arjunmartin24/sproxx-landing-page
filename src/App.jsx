@@ -40,7 +40,7 @@ export default function App() {
   }, []);
 
   return (
-    <div ref={ref} className="relative min-h-screen overflow-hidden bg-[#050608] text-white selection:bg-cyan-400/20 selection:text-cyan-300">
+    <div ref={ref} className="relative min-h-screen overflow-hidden bg-beige text-white selection:bg-cyan-400/20 selection:text-cyan-300">
       {/* Background effects */}
       <canvas id="particleCanvas" className="absolute inset-0 z-0"></canvas>
 
@@ -58,7 +58,7 @@ export default function App() {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
-          className="text-5xl sm:text-6xl md:text-7xl font-extrabold bg-gradient-to-r from-[#60A5FA] via-[#80D0C7] to-[#A78BFA] bg-clip-text text-transparent drop-shadow-[0_0_20px_rgba(79,195,247,0.4)]"
+          className="text-5xl sm:text-6xl md:text-7xl font-extrabold bg-gradient-to-r from-[#60A5FA] via-[#80D0C7] to-[#A78BFA] bg-clip-text text-transparent drop-shadow-[0_0_20px_rgba(79,195,247,0.4)[...]"
         >
           The AI Watchdog for Supply Chain Integrity
         </motion.h1>
