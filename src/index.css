@@ -15,3 +15,11 @@ body {
   background: #a5f3fc; /* cyan-200 */
   color: #0e7490;      /* cyan-700 */
 }
+@layer base {
+  body {
+    @apply text-black bg-white;
+  }
+  p {
+    @apply text-black;
+  }
+}
