@@ -100,7 +100,7 @@ export default function App() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-4xl md:text-5xl font-semibold mb-16 bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent"
+          className="text-4xl md:text-5xl font-semibold mb-16 bg-gradient-to-r from-amber-300 to-pink-500 bg-clip-text text-transparent"
         >
           Powering Next-Gen Procurement Teams
         </motion.h2>
