@@ -40,7 +40,7 @@ export default function App() {
   }, []);
 
   return (
-    <<div ref={ref} className="relative min-h-screen overflow-hidden bg-[#050608] text-white selection:bg-cyan-400/20 selection:text-cyan-300">
+    <div ref={ref} className="relative min-h-screen overflow-hidden bg-white text-black selection:bg-cyan-100 selection:text-cyan-600">
       {/* Background effects */}
       <canvas id="particleCanvas" className="absolute inset-0 z-0"></canvas>
 
