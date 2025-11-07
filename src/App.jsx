@@ -283,9 +283,6 @@ export default function App() {
           : "border-gray-200 text-gray-600"
       }`}>
         <p>© 2025 Sproxx Inc. — Terminus: The P21 PO Sentinel.</p>
-        <p className={`mt-2 ${
-          isDark ? "text-gray-600" : "text-gray-500"
-        }`}>Built with FastAPI · React · Tailwind · Framer Motion</p>
       </footer>
     </div>
   );
