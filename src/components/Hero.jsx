@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 
-export default function Hero() {
+export default function Hero({ isDark = true }) {
   return (
     <section className="relative z-10 flex flex-col items-center justify-center text-center min-h-screen px-6">
       <motion.h1
@@ -16,7 +16,9 @@ export default function Hero() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.5, duration: 1 }}
-        className="text-gray-300 text-lg max-w-3xl mt-6 leading-relaxed"
+        className={`text-lg max-w-3xl mt-6 leading-relaxed ${
+          isDark ? "text-gray-300" : "text-gray-600"
+        }`}
       >
         Terminus connects directly to your Gmail, extracts vendor confirmations,
         and flags anomalies before they contaminate your ERP.
@@ -36,7 +38,11 @@ export default function Hero() {
         </a>
         <a
           href="#features"
-          className="px-8 py-4 border border-[#4FC3F7] text-[#4FC3F7] rounded-lg font-semibold hover:bg-[#4FC3F7]/10 transition-all hover:-translate-y-1"
+          className={`px-8 py-4 border rounded-lg font-semibold transition-all hover:-translate-y-1 ${
+            isDark
+              ? "border-[#4FC3F7] text-[#4FC3F7] hover:bg-[#4FC3F7]/10"
+              : "border-blue-600 text-blue-600 hover:bg-blue-50"
+          }`}
         >
           Explore Features
         </a>
