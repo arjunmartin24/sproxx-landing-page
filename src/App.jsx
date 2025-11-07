@@ -68,7 +68,7 @@ export default function App() {
           {[
             {
               icon: "📥",
-              title: "Gmail Integration",
+              title: "Email Integration",
               desc: "Connect securely via OAuth 2.0 and auto-pull vendor confirmations and PDF attachments.",
             },
             {
