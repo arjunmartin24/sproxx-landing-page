@@ -1,23 +1,35 @@
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useState, useRef } from "react";
+import { motion, useScroll } from "framer-motion";
+import AnimatedSproxxLogo from "./AnimatedSproxxLogo";
+import Navbar from "./Navbar";
 import Hero from "./components/Hero";
 import "./index.css";
 
 export default function App() {
   const [isDark, setIsDark] = useState(true);
+  const heroRef = useRef(null);
 
   const toggleTheme = () => {
     setIsDark(!isDark);
   };
 
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+
   return (
-    <div className={`relative overflow-hidden transition-colors duration-300 ${
-      isDark ? "bg-[#07080A] text-white" : "bg-white text-gray-900"
-    }`}>
-      {/* Theme Toggle */}
+    <div
+      className={`relative overflow-hidden transition-colors duration-300 ${
+        isDark ? "bg-[#07080A] text-white" : "bg-white text-gray-900"
+      }`}
+    >
+      <AnimatedSproxxLogo />
+      <Navbar />
+
       <button
         onClick={toggleTheme}
-        className="fixed top-6 right-6 z-50 w-14 h-8 rounded-full p-1 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+        className="fixed top-6 right-6 z-[60] w-14 h-8 rounded-full p-1 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
         style={{
           backgroundColor: isDark ? "#1A1C24" : "#E5E7EB",
         }}
@@ -40,7 +52,7 @@ export default function App() {
           )}
         </motion.div>
       </button>
-      {/* Gradient Background Glow - Only in dark mode */}
+
       {isDark && (
         <motion.div
           className="absolute top-0 left-1/2 -translate-x-1/2 w-[1200px] h-[1200px] bg-gradient-to-r from-[#4FC3F7]/10 to-[#7C4DFF]/10 blur-[250px] rounded-full z-0"
@@ -49,10 +61,10 @@ export default function App() {
         />
       )}
 
-      {/* HERO */}
-      <Hero isDark={isDark} />
+      <div ref={heroRef}>
+        <Hero isDark={isDark} scrollProgress={scrollYProgress} />
+      </div>
 
-      {/* CORE SECTIONS */}
       <section id="features" className="relative z-10 py-32 px-6 text-center">
         <motion.h2
           initial={{ opacity: 0, y: 50 }}
@@ -110,12 +122,20 @@ export default function App() {
               }`}
             >
               <div className="text-4xl mb-4">{f.icon}</div>
-              <h3 className={`text-2xl font-semibold mb-3 ${
-                isDark ? "text-[#4FC3F7]" : "text-blue-600"
-              }`}>{f.title}</h3>
-              <p className={`text-base ${
-                isDark ? "text-gray-400" : "text-gray-600"
-              }`}>{f.desc}</p>
+              <h3
+                className={`text-2xl font-semibold mb-3 ${
+                  isDark ? "text-[#4FC3F7]" : "text-blue-600"
+                }`}
+              >
+                {f.title}
+              </h3>
+              <p
+                className={`text-base ${
+                  isDark ? "text-gray-400" : "text-gray-600"
+                }`}
+              >
+                {f.desc}
+              </p>
             </motion.div>
           ))}
         </div>
