@@ -11,10 +11,14 @@ export default function App() {
   };
 
   return (
-    <div className={`relative overflow-hidden transition-colors duration-300 ${
-      isDark ? "bg-[#07080A] text-white" : "bg-white text-gray-900"
-    }`}>
-      {/* Theme Toggle */}
+    <div
+      className={`relative overflow-hidden transition-colors duration-300 ${
+        isDark ? "bg-[#07080A] text-white" : "bg-white text-gray-900"
+      }`}
+    >
+      {/* ------------------------------ */}
+      {/* THEME TOGGLE BUTTON            */}
+      {/* ------------------------------ */}
       <button
         onClick={toggleTheme}
         className="fixed top-6 right-6 z-50 w-14 h-8 rounded-full p-1 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
@@ -40,19 +44,40 @@ export default function App() {
           )}
         </motion.div>
       </button>
-      {/* Gradient Background Glow - Only in dark mode */}
+
+      {/* ------------------------------ */}
+      {/* FIXED GLOW BEHIND EVERYTHING   */}
+      {/* ------------------------------ */}
       {isDark && (
         <motion.div
-          className="absolute top-0 left-1/2 -translate-x-1/2 w-[1200px] h-[1200px] bg-gradient-to-r from-[#4FC3F7]/10 to-[#7C4DFF]/10 blur-[250px] rounded-full z-0"
+          className="
+            fixed 
+            top-0 
+            left-1/2 
+            -translate-x-1/2 
+            w-[1200px] 
+            h-[1200px] 
+            bg-gradient-to-r 
+            from-[#4FC3F7]/10 
+            to-[#7C4DFF]/10 
+            blur-[250px] 
+            rounded-full 
+            -z-10 
+            pointer-events-none
+          "
           animate={{ scale: [1, 1.15, 1], opacity: [0.8, 1, 0.8] }}
           transition={{ duration: 10, repeat: Infinity }}
         />
       )}
 
-      {/* HERO */}
+      {/* ------------------------------ */}
+      {/* HERO SECTION                    */}
+      {/* ------------------------------ */}
       <Hero isDark={isDark} />
 
-      {/* CORE SECTIONS */}
+      {/* ------------------------------ */}
+      {/* FEATURES SECTION                */}
+      {/* ------------------------------ */}
       <section id="features" className="relative z-10 py-32 px-6 text-center">
         <motion.h2
           initial={{ opacity: 0, y: 50 }}
@@ -65,7 +90,7 @@ export default function App() {
         </motion.h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 max-w-6xl mx-auto">
-          {[
+          {[ 
             {
               icon: "📥",
               title: "Email Integration",
@@ -110,21 +135,33 @@ export default function App() {
               }`}
             >
               <div className="text-4xl mb-4">{f.icon}</div>
-              <h3 className={`text-2xl font-semibold mb-3 ${
-                isDark ? "text-[#4FC3F7]" : "text-blue-600"
-              }`}>{f.title}</h3>
-              <p className={`text-base ${
-                isDark ? "text-gray-400" : "text-gray-600"
-              }`}>{f.desc}</p>
+              <h3
+                className={`text-2xl font-semibold mb-3 ${
+                  isDark ? "text-[#4FC3F7]" : "text-blue-600"
+                }`}
+              >
+                {f.title}
+              </h3>
+              <p
+                className={`text-base ${
+                  isDark ? "text-gray-400" : "text-gray-600"
+                }`}
+              >
+                {f.desc}
+              </p>
             </motion.div>
           ))}
         </div>
       </section>
 
-      {/* How It Works Section */}
-      <section className={`relative z-10 py-32 px-6 text-center ${
-        isDark ? "bg-[#0B0C10]" : "bg-white"
-      }`}>
+      {/* ------------------------------ */}
+      {/* HOW IT WORKS                   */}
+      {/* ------------------------------ */}
+      <section
+        className={`relative z-10 py-32 px-6 text-center ${
+          isDark ? "bg-[#0B0C10]" : "bg-white"
+        }`}
+      >
         <motion.h2
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -166,21 +203,33 @@ export default function App() {
               }`}
             >
               <div className="text-5xl mb-4">{f.step}</div>
-              <h3 className={`text-2xl font-semibold mb-3 ${
-                isDark ? "text-white" : "text-gray-900"
-              }`}>{f.title}</h3>
-              <p className={`text-base ${
-                isDark ? "text-gray-400" : "text-gray-600"
-              }`}>{f.desc}</p>
+              <h3
+                className={`text-2xl font-semibold mb-3 ${
+                  isDark ? "text-white" : "text-gray-900"
+                }`}
+              >
+                {f.title}
+              </h3>
+              <p
+                className={`text-base ${
+                  isDark ? "text-gray-400" : "text-gray-600"
+                }`}
+              >
+                {f.desc}
+              </p>
             </motion.div>
           ))}
         </div>
       </section>
 
-      {/* Integrations Section */}
-      <section className={`relative z-10 py-24 px-6 text-center ${
-        isDark ? "bg-[#11131A]" : "bg-gray-50"
-      }`}>
+      {/* ------------------------------ */}
+      {/* INTEGRATIONS                   */}
+      {/* ------------------------------ */}
+      <section
+        className={`relative z-10 py-24 px-6 text-center ${
+          isDark ? "bg-[#11131A]" : "bg-gray-50"
+        }`}
+      >
         <motion.h2
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -191,29 +240,35 @@ export default function App() {
           Integrates Seamlessly With
         </motion.h2>
 
-        <div className={`flex flex-wrap justify-center items-center gap-10 text-lg font-medium ${
-          isDark ? "text-gray-400" : "text-gray-600"
-        }`}>
-          {["Epicor P21", "SAP", "NetSuite", "QuickBooks", "Excel / CSV"].map((name, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.1, duration: 0.7 }}
-              viewport={{ once: true }}
-              className={`px-6 py-3 rounded-xl shadow-sm hover:shadow-md transition-all ${
-                isDark
-                  ? "bg-[#0C0E13]/80 border border-[#1A1C24]"
-                  : "bg-white border border-gray-200"
-              }`}
-            >
-              {name}
-            </motion.div>
-          ))}
+        <div
+          className={`flex flex-wrap justify-center items-center gap-10 text-lg font-medium ${
+            isDark ? "text-gray-400" : "text-gray-600"
+          }`}
+        >
+          {["Epicor P21", "SAP", "NetSuite", "QuickBooks", "Excel / CSV"].map(
+            (name, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.1, duration: 0.7 }}
+                viewport={{ once: true }}
+                className={`px-6 py-3 rounded-xl shadow-sm hover:shadow-md transition-all ${
+                  isDark
+                    ? "bg-[#0C0E13]/80 border border-[#1A1C24]"
+                    : "bg-white border border-gray-200"
+                }`}
+              >
+                {name}
+              </motion.div>
+            )
+          )}
         </div>
       </section>
 
-      {/* Final CTA */}
+      {/* ------------------------------ */}
+      {/* FINAL CTA                      */}
+      {/* ------------------------------ */}
       <section className="relative z-10 py-32 px-6 text-center bg-gradient-to-r from-blue-600 to-cyan-500 text-white">
         <motion.h2
           initial={{ opacity: 0, y: 50 }}
@@ -243,12 +298,16 @@ export default function App() {
         </div>
       </section>
 
-      {/* CALL TO ACTION */}
-      <section className={`relative z-10 py-28 text-center border-y ${
-        isDark
-          ? "bg-gradient-to-r from-[#11131A] via-[#0B0C10] to-[#11131A] border-[#1A1C24]"
-          : "bg-gradient-to-r from-gray-100 via-gray-50 to-gray-100 border-gray-200"
-      }`}>
+      {/* ------------------------------ */}
+      {/* CTA STRIP                      */}
+      {/* ------------------------------ */}
+      <section
+        className={`relative z-10 py-28 text-center border-y ${
+          isDark
+            ? "bg-gradient-to-r from-[#11131A] via-[#0B0C10] to-[#11131A] border-[#1A1C24]"
+            : "bg-gradient-to-r from-gray-100 via-gray-50 to-gray-100 border-gray-200"
+        }`}
+      >
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -257,6 +316,7 @@ export default function App() {
         >
           See Every Confirmation. Catch Every Anomaly.
         </motion.h2>
+
         <motion.p
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -268,6 +328,7 @@ export default function App() {
           Terminus transforms your Gmail inbox into a proactive procurement shield.
           Detect vendor errors, analyze behavior, and protect margins — all automatically.
         </motion.p>
+
         <a
           href="https://app.sproxx.io"
           className="inline-block px-10 py-4 bg-gradient-to-r from-[#6C63FF] to-[#4FC3F7] rounded-lg text-white font-semibold shadow-lg hover:shadow-[#4FC3F7]/40 hover:-translate-y-1 transition-all"
@@ -276,12 +337,16 @@ export default function App() {
         </a>
       </section>
 
-      {/* FOOTER */}
-      <footer className={`relative z-10 border-t py-10 text-sm text-center ${
-        isDark
-          ? "border-gray-800 text-gray-500"
-          : "border-gray-200 text-gray-600"
-      }`}>
+      {/* ------------------------------ */}
+      {/* FOOTER                         */}
+      {/* ------------------------------ */}
+      <footer
+        className={`relative z-10 border-t py-10 text-sm text-center ${
+          isDark
+            ? "border-gray-800 text-gray-500"
+            : "border-gray-200 text-gray-600"
+        }`}
+      >
         <p>© 2025 Sproxx Inc. — Terminus: The P21 PO Sentinel.</p>
       </footer>
     </div>
