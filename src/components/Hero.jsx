@@ -1,18 +1,20 @@
 import { motion } from "framer-motion";
-import BlurText from "./BlurText.jsx";   // ✅ Correct path now
+import BlurText from "./BlurText.jsx";
 
 export default function Hero({ isDark = true }) {
   return (
-    <section className="relative z-10 flex flex-col items-center justify-center text-center min-h-screen px-6">
+    <section className="relative z-10 flex flex-col items-center justify-center text-center min-h-screen px-6 pt-24">
 
       <BlurText
         text="The AI Watchdog for Supply Chain Integrity"
         delay={120}
         animateBy="words"
         direction="top"
-        className="text-5xl sm:text-6xl md:text-7xl font-extrabold bg-gradient-to-r 
-                   from-[#7C4DFF] via-[#4FC3F7] to-[#00E5FF] bg-clip-text 
-                   text-transparent drop-shadow-[0_0_15px_#4FC3F7]"
+        className="bg-transparent w-full flex justify-center text-center 
+                   text-5xl sm:text-6xl md:text-7xl font-extrabold 
+                   bg-gradient-to-r from-[#7C4DFF] via-[#4FC3F7] to-[#00E5FF]
+                   bg-clip-text text-transparent 
+                   drop-shadow-[0_0_8px_#4FC3F7]"
       />
 
       <motion.p
@@ -53,7 +55,6 @@ export default function Hero({ isDark = true }) {
           Explore Features
         </a>
       </motion.div>
-
     </section>
   );
 }
