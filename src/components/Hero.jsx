@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import BlurText from "./BlurText";   // ✅ Correct path now
+import BlurText from "./BlurText.jsx";   // ✅ Correct path now
 
 export default function Hero({ isDark = true }) {
   return (
