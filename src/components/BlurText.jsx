@@ -30,11 +30,13 @@ const BlurText = ({
 }) => {
   const elements =
     animateBy === "words" ? text.split(" ") : text.split("");
+
   const [inView, setInView] = useState(false);
   const ref = useRef(null);
 
   useEffect(() => {
     if (!ref.current) return;
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -44,6 +46,7 @@ const BlurText = ({
       },
       { threshold, rootMargin }
     );
+
     observer.observe(ref.current);
     return () => observer.disconnect();
   }, [threshold, rootMargin]);
@@ -81,8 +84,12 @@ const BlurText = ({
   return (
     <p
       ref={ref}
-      className={`${className} w-full flex flex-wrap justify-center text-center bg-transparent`}
-      style={{ display: "flex", flexWrap: "wrap" }}
+      className={`${className} w-full flex flex-wrap justify-center text-center`}
+      style={{
+        display: "flex",
+        flexWrap: "wrap",
+        background: "inherit",
+      }}
     >
       {elements.map((segment, index) => {
         const animateKeyframes = buildKeyframes(
@@ -99,11 +106,16 @@ const BlurText = ({
 
         return (
           <motion.span
-            className="inline-block will-change-[transform,filter,opacity]"
             key={index}
+            className="inline-block will-change-[transform,filter,opacity]"
             initial={fromSnapshot}
             animate={inView ? animateKeyframes : fromSnapshot}
             transition={spanTransition}
+            style={{
+              background: "inherit",
+              WebkitBackgroundClip: "text",
+              color: "transparent",
+            }}
             onAnimationComplete={
               index === elements.length - 1
                 ? onAnimationComplete
