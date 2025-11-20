@@ -17,9 +17,6 @@ body {
 }
 @layer base {
   body {
-    @apply text-black bg-white;
-  }
-  p {
-    @apply text-black;
+    @apply text-black bg-white text-black;
   }
 }
