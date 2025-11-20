@@ -3,18 +3,19 @@ import BlurText from "./BlurText.jsx";
 
 export default function Hero({ isDark = true }) {
   return (
-    <section className="relative z-10 flex flex-col items-center justify-center text-center min-h-screen px-6 pt-24">
+    <section className="relative z-10 flex flex-col items-center justify-center text-center min-h-screen px-6 pt-28">
 
       <BlurText
         text="The AI Watchdog for Supply Chain Integrity"
         delay={120}
         animateBy="words"
         direction="top"
-        className="bg-transparent w-full flex justify-center text-center 
-                   text-5xl sm:text-6xl md:text-7xl font-extrabold 
-                   bg-gradient-to-r from-[#7C4DFF] via-[#4FC3F7] to-[#00E5FF]
-                   bg-clip-text text-transparent 
-                   drop-shadow-[0_0_8px_#4FC3F7]"
+        className="
+          text-5xl sm:text-6xl md:text-7xl font-extrabold leading-tight
+          bg-gradient-to-r from-[#7C4DFF] via-[#4FC3F7] to-[#00E5FF]
+          bg-clip-text text-transparent
+          w-full flex justify-center
+        "
       />
 
       <motion.p
@@ -43,18 +44,19 @@ export default function Hero({ isDark = true }) {
         >
           Launch App
         </a>
+
         <a
           href="#features"
-          className={`px-8 py-4 border rounded-lg font-semibold 
-                      transition-all hover:-translate-y-1 ${
-                        isDark
-                          ? "border-[#4FC3F7] text-[#4FC3F7] hover:bg-[#4FC3F7]/10"
-                          : "border-blue-600 text-blue-600 hover:bg-blue-50"
-                      }`}
+          className={`px-8 py-4 border rounded-lg font-semibold transition-all hover:-translate-y-1 ${
+            isDark
+              ? "border-[#4FC3F7] text-[#4FC3F7] hover:bg-[#4FC3F7]/10"
+              : "border-blue-600 text-blue-600 hover:bg-blue-50"
+          }`}
         >
           Explore Features
         </a>
       </motion.div>
+
     </section>
   );
 }
