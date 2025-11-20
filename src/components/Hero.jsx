@@ -1,17 +1,22 @@
 import { motion } from "framer-motion";
+import BlurText from "../BlurText"; // using your structure (src/BlurText.jsx)
 
 export default function Hero({ isDark = true }) {
   return (
     <section className="relative z-10 flex flex-col items-center justify-center text-center min-h-screen px-6">
-      <motion.h1
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1 }}
-        className="text-5xl sm:text-6xl md:text-7xl font-extrabold bg-gradient-to-r from-[#7C4DFF] via-[#4FC3F7] to-[#00E5FF] bg-clip-text text-transparent drop-shadow-[0_0_15px_#4FC3F7]"
-      >
-        The AI Watchdog for Supply Chain Integrity
-      </motion.h1>
 
+      {/* 🔥 BlurText replacing your old motion.h1 */}
+      <BlurText
+        text="The AI Watchdog for Supply Chain Integrity"
+        delay={120}
+        animateBy="words"
+        direction="top"
+        className="text-5xl sm:text-6xl md:text-7xl font-extrabold bg-gradient-to-r 
+                   from-[#7C4DFF] via-[#4FC3F7] to-[#00E5FF] bg-clip-text 
+                   text-transparent drop-shadow-[0_0_15px_#4FC3F7]"
+      />
+
+      {/* 🔥 Your paragraph stays exactly the same */}
       <motion.p
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -24,6 +29,7 @@ export default function Hero({ isDark = true }) {
         and flags anomalies before they contaminate your ERP.
       </motion.p>
 
+      {/* 🔥 CTA buttons untouched */}
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -32,21 +38,25 @@ export default function Hero({ isDark = true }) {
       >
         <a
           href="https://app.sproxx.io"
-          className="px-8 py-4 bg-gradient-to-r from-[#6C63FF] to-[#4FC3F7] rounded-lg text-white font-semibold shadow-lg hover:shadow-[#4FC3F7]/40 transition-all hover:-translate-y-1"
+          className="px-8 py-4 bg-gradient-to-r from-[#6C63FF] to-[#4FC3F7] 
+                     rounded-lg text-white font-semibold shadow-lg 
+                     hover:shadow-[#4FC3F7]/40 transition-all hover:-translate-y-1"
         >
           Launch App
         </a>
         <a
           href="#features"
-          className={`px-8 py-4 border rounded-lg font-semibold transition-all hover:-translate-y-1 ${
-            isDark
-              ? "border-[#4FC3F7] text-[#4FC3F7] hover:bg-[#4FC3F7]/10"
-              : "border-blue-600 text-blue-600 hover:bg-blue-50"
-          }`}
+          className={`px-8 py-4 border rounded-lg font-semibold 
+                      transition-all hover:-translate-y-1 ${
+                        isDark
+                          ? "border-[#4FC3F7] text-[#4FC3F7] hover:bg-[#4FC3F7]/10"
+                          : "border-blue-600 text-blue-600 hover:bg-blue-50"
+                      }`}
         >
           Explore Features
         </a>
       </motion.div>
+
     </section>
   );
 }
