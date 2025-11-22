@@ -106,11 +106,10 @@ const BlurText = ({
         return (
           <motion.span
             key={index}
-            className="inline-block will-change-[transform,filter,opacity]"
+            className="inline-block will-change-[transform,filter,opacity] bg-clip-text text-transparent"
             initial={fromSnapshot}
             animate={inView ? animateKeyframes : fromSnapshot}
             transition={spanTransition}
-            className="bg-clip-text text-transparent"
             style={{
               background: "inherit",
             }}

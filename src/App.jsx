@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import Hero from "./components/Hero";
+import BlurText from "./components/BlurText";
 import "./index.css";
 
 export default function App() {
@@ -79,15 +80,13 @@ export default function App() {
       {/* FEATURES SECTION                */}
       {/* ------------------------------ */}
       <section id="features" className="relative z-10 py-32 px-6 text-center">
-        <motion.h2
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
+        <BlurText
+          text="Supply Chain Armor With a Memory"
+          delay={100}
+          animateBy="words"
+          direction="top"
           className="text-4xl md:text-5xl font-semibold mb-20 bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent"
-        >
-          Supply Chain Armor With a Memory
-        </motion.h2>
+        />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 max-w-6xl mx-auto">
           {[ 
@@ -162,15 +161,13 @@ export default function App() {
           isDark ? "bg-[#0B0C10]" : "bg-white"
         }`}
       >
-        <motion.h2
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
+        <BlurText
+          text="How Terminus Works"
+          delay={100}
+          animateBy="words"
+          direction="top"
           className="text-4xl md:text-5xl font-semibold mb-16 bg-gradient-to-r from-cyan-500 to-blue-500 bg-clip-text text-transparent"
-        >
-          How Terminus Works
-        </motion.h2>
+        />
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 max-w-6xl mx-auto">
           {[
@@ -230,15 +227,13 @@ export default function App() {
           isDark ? "bg-[#11131A]" : "bg-gray-50"
         }`}
       >
-        <motion.h2
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
+        <BlurText
+          text="Integrates Seamlessly With"
+          delay={100}
+          animateBy="words"
+          direction="top"
           className="text-4xl md:text-5xl font-semibold mb-10 bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent"
-        >
-          Integrates Seamlessly With
-        </motion.h2>
+        />
 
         <div
           className={`flex flex-wrap justify-center items-center gap-10 text-lg font-medium ${
@@ -270,15 +265,13 @@ export default function App() {
       {/* FINAL CTA                      */}
       {/* ------------------------------ */}
       <section className="relative z-10 py-32 px-6 text-center bg-gradient-to-r from-blue-600 to-cyan-500 text-white">
-        <motion.h2
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-4xl md:text-5xl font-bold mb-8"
-        >
-          Ready to Modernize Your Procurement?
-        </motion.h2>
+        <BlurText
+          text="Ready to Modernize Your Procurement?"
+          delay={80}
+          animateBy="words"
+          direction="top"
+          className="text-4xl md:text-5xl font-bold mb-8 bg-gradient-to-r from-white to-white/90 bg-clip-text text-transparent"
+        />
         <p className="text-lg text-white/90 max-w-3xl mx-auto mb-12">
           Get early access to Terminus and bring automated vendor validation to your supply chain today.
         </p>
@@ -308,14 +301,13 @@ export default function App() {
             : "bg-gradient-to-r from-gray-100 via-gray-50 to-gray-100 border-gray-200"
         }`}
       >
-        <motion.h2
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+        <BlurText
+          text="See Every Confirmation. Catch Every Anomaly."
+          delay={80}
+          animateBy="words"
+          direction="top"
           className="text-5xl font-bold mb-10 bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent"
-        >
-          See Every Confirmation. Catch Every Anomaly.
-        </motion.h2>
+        />
 
         <motion.p
           initial={{ opacity: 0 }}
