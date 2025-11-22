@@ -54,8 +54,8 @@ const BlurText = ({
   const defaultFrom = useMemo(
     () =>
       direction === "top"
-        ? { filter: "blur(10px)", opacity: 0, y: -50 }
-        : { filter: "blur(10px)", opacity: 0, y: 50 },
+        ? { filter: "blur(10px)", opacity: 0.3, y: -50 }
+        : { filter: "blur(10px)", opacity: 0.3, y: 50 },
     [direction]
   );
 
@@ -63,7 +63,7 @@ const BlurText = ({
     () => [
       {
         filter: "blur(5px)",
-        opacity: 0.5,
+        opacity: 0.8,
         y: direction === "top" ? 5 : -5,
       },
       { filter: "blur(0px)", opacity: 1, y: 0 },
@@ -88,7 +88,6 @@ const BlurText = ({
       style={{
         display: "flex",
         flexWrap: "wrap",
-        background: "inherit",
       }}
     >
       {elements.map((segment, index) => {
@@ -111,10 +110,9 @@ const BlurText = ({
             initial={fromSnapshot}
             animate={inView ? animateKeyframes : fromSnapshot}
             transition={spanTransition}
+            className="bg-clip-text text-transparent"
             style={{
               background: "inherit",
-              WebkitBackgroundClip: "text",
-              color: "transparent",
             }}
             onAnimationComplete={
               index === elements.length - 1
