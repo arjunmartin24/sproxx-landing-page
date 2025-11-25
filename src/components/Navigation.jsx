@@ -45,6 +45,16 @@ export default function Navigation({ isDark, onGridAccessClick, showLoginModal, 
           {/* Menu Items */}
           <div className="flex items-center gap-6">
             <button
+              onClick={() => navigate("/login")}
+              className={`px-4 py-2 rounded-lg font-medium transition-all hover:-translate-y-0.5 ${
+                isDark
+                  ? "text-gray-300 hover:bg-gray-800/50 border border-gray-700 hover:border-gray-600"
+                  : "text-gray-700 hover:bg-gray-100 border border-gray-300 hover:border-gray-400"
+              }`}
+            >
+              LOGIN
+            </button>
+            <button
               onClick={handleGridAccessClick}
               className={`px-4 py-2 rounded-lg font-medium transition-all hover:-translate-y-0.5 ${
                 isDark
