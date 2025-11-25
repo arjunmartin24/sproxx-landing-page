@@ -2,16 +2,12 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import Hero from "./components/Hero";
 import BlurText from "./components/BlurText";
-import Login from "./Login";
+import Navigation from "./components/Navigation";
 import "./index.css";
 
 export default function App() {
-  const [loggedIn, setLoggedIn] = useState(false);
   const [isDark, setIsDark] = useState(true);
-
-  if (!loggedIn) {
-    return <Login onLogin={() => setLoggedIn(true)} />;
-  }
+  const [showLoginModal, setShowLoginModal] = useState(false);
 
   const toggleTheme = () => {
     setIsDark(!isDark);
@@ -23,6 +19,16 @@ export default function App() {
         isDark ? "bg-[#07080A] text-white" : "bg-white text-gray-900"
       }`}
     >
+      {/* ------------------------------ */}
+      {/* NAVIGATION HEADER              */}
+      {/* ------------------------------ */}
+      <Navigation 
+        isDark={isDark} 
+        onGridAccessClick={() => setShowLoginModal(true)}
+        showLoginModal={showLoginModal}
+        onCloseLogin={() => setShowLoginModal(false)}
+      />
+
       {/* ------------------------------ */}
       {/* THEME TOGGLE BUTTON            */}
       {/* ------------------------------ */}

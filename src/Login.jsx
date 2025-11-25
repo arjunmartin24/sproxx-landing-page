@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 
-export default function Login({ onLogin }) {
+export default function Login({ onLogin, isModal = false }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -18,27 +18,29 @@ export default function Login({ onLogin }) {
   };
 
   return (
-    <div className="relative overflow-hidden min-h-screen bg-[#07080A] text-white flex items-center justify-center">
-      {/* Background Glow Effect */}
-      <motion.div
-        className="
-          fixed 
-          top-0 
-          left-1/2 
-          -translate-x-1/2 
-          w-[1200px] 
-          h-[1200px] 
-          bg-gradient-to-r 
-          from-[#4FC3F7]/10 
-          to-[#7C4DFF]/10 
-          blur-[250px] 
-          rounded-full 
-          -z-10 
-          pointer-events-none
-        "
-        animate={{ scale: [1, 1.15, 1], opacity: [0.8, 1, 0.8] }}
-        transition={{ duration: 10, repeat: Infinity }}
-      />
+    <div className={`relative overflow-hidden ${isModal ? '' : 'min-h-screen bg-[#07080A]'} text-white flex items-center justify-center`}>
+      {/* Background Glow Effect - only show when not modal */}
+      {!isModal && (
+        <motion.div
+          className="
+            fixed 
+            top-0 
+            left-1/2 
+            -translate-x-1/2 
+            w-[1200px] 
+            h-[1200px] 
+            bg-gradient-to-r 
+            from-[#4FC3F7]/10 
+            to-[#7C4DFF]/10 
+            blur-[250px] 
+            rounded-full 
+            -z-10 
+            pointer-events-none
+          "
+          animate={{ scale: [1, 1.15, 1], opacity: [0.8, 1, 0.8] }}
+          transition={{ duration: 10, repeat: Infinity }}
+        />
+      )}
 
       {/* Login Card */}
       <motion.div
