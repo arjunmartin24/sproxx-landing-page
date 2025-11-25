@@ -3,7 +3,7 @@ import BlurText from "./BlurText.jsx";
 
 export default function Hero({ isDark = true }) {
   return (
-    <section className="relative z-10 flex flex-col items-center justify-center text-center min-h-screen px-6 pt-32">
+    <section className="relative z-10 flex flex-col items-center justify-center text-center min-h-screen px-6 pt-28">
 
       <BlurText
         text="The AI Watchdog for Supply Chain Integrity"
