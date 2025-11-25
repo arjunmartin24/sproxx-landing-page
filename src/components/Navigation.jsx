@@ -1,7 +1,29 @@
 import { motion, AnimatePresence } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import Login from "../Login";
 
 export default function Navigation({ isDark, onGridAccessClick, showLoginModal, onCloseLogin }) {
+  const navigate = useNavigate();
+
+  const handleGridAccessClick = () => {
+    // Check if user is logged in
+    const isLoggedIn = localStorage.getItem("loggedIn") === "true";
+    
+    if (isLoggedIn) {
+      // If logged in, navigate to /gridaccess
+      navigate("/gridaccess");
+    } else {
+      // If not logged in, show login modal
+      onGridAccessClick();
+    }
+  };
+
+  const handleLoginSuccess = () => {
+    // Close modal and navigate to /gridaccess
+    onCloseLogin();
+    navigate("/gridaccess");
+  };
+
   return (
     <>
       <nav
@@ -13,14 +35,17 @@ export default function Navigation({ isDark, onGridAccessClick, showLoginModal, 
       >
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           {/* Logo/Brand */}
-          <div className="text-2xl font-extrabold bg-gradient-to-r from-[#7C4DFF] via-[#4FC3F7] to-[#00E5FF] bg-clip-text text-transparent">
+          <div 
+            className="text-2xl font-extrabold bg-gradient-to-r from-[#7C4DFF] via-[#4FC3F7] to-[#00E5FF] bg-clip-text text-transparent cursor-pointer"
+            onClick={() => navigate("/")}
+          >
             TERMINUS
           </div>
 
           {/* Menu Items */}
           <div className="flex items-center gap-6">
             <button
-              onClick={onGridAccessClick}
+              onClick={handleGridAccessClick}
               className={`px-4 py-2 rounded-lg font-medium transition-all hover:-translate-y-0.5 ${
                 isDark
                   ? "text-[#4FC3F7] hover:bg-[#4FC3F7]/10 border border-[#4FC3F7]/30 hover:border-[#4FC3F7]"
@@ -58,7 +83,7 @@ export default function Navigation({ isDark, onGridAccessClick, showLoginModal, 
               >
                 ×
               </button>
-              <Login onLogin={onCloseLogin} isModal={true} />
+              <Login onLogin={handleLoginSuccess} isModal={true} />
             </motion.div>
           </motion.div>
         )}

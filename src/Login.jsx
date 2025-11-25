@@ -11,6 +11,8 @@ export default function Login({ onLogin, isModal = false }) {
     setError("");
 
     if (username === "terminus" && password === "guardian123") {
+      // Save login status to localStorage
+      localStorage.setItem("loggedIn", "true");
       onLogin();
     } else {
       setError("Invalid credentials. Please try again.");

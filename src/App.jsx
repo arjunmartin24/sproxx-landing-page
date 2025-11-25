@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import LoginGate from "./components/LoginGate";
+import LandingPage from "./components/LandingPage";
 import GridAccess from "./GridAccess";
 import ProtectedRoute from "./components/ProtectedRoute";
 import "./index.css";
@@ -7,8 +7,8 @@ import "./index.css";
 export default function App() {
   return (
     <Routes>
-      {/* Root route - shows login gate */}
-      <Route path="/" element={<LoginGate />} />
+      {/* Root route - shows Terminus landing page */}
+      <Route path="/" element={<LandingPage />} />
       
       {/* Protected route - only accessible after login */}
       <Route 
