@@ -20,3 +20,14 @@ body {
     @apply text-black bg-white text-black;
   }
 }
+
+/* Isolate GridAccess content from Tailwind styles */
+.grid-access-wrapper {
+  isolation: isolate;
+  contain: layout style paint;
+}
+
+.grid-access-wrapper * {
+  /* Allow all styles from the HTML to work */
+  box-sizing: border-box;
+}
