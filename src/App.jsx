@@ -2,10 +2,16 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import Hero from "./components/Hero";
 import BlurText from "./components/BlurText";
+import Login from "./Login";
 import "./index.css";
 
 export default function App() {
+  const [loggedIn, setLoggedIn] = useState(false);
   const [isDark, setIsDark] = useState(true);
+
+  if (!loggedIn) {
+    return <Login onLogin={() => setLoggedIn(true)} />;
+  }
 
   const toggleTheme = () => {
     setIsDark(!isDark);
