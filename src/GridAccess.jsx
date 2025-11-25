@@ -351,7 +351,7 @@ export default function GridAccess() {
         <p><strong>Check-in:</strong> Dec 23 (3 PM) • <strong>Check-out:</strong> Dec 29 (12 PM)<br>
            <strong>Room:</strong> 2 Double Beds • 6 nights • Fully prepaid<br>
            <strong>Total paid:</strong> CA$1,125.84 (~CA$562 each)<br>
-           <strong>Confirmation:</strong> 109843795 • Expedia #72068545156917</p>
+           <strong>Confirmation:</strong> [Booking details on file]</p>
       </div>
     </div>
   </section>
@@ -390,8 +390,8 @@ export default function GridAccess() {
         </tbody>
       </table>
       <p style="margin-top:1rem;text-align:center;">
-        <strong>Confirmation:</strong> CFA2N4 • <strong>Ticket #:</strong> 0142314123489<br>
-        <strong>Total paid:</strong> <strong style="color:var(--gold);">CA$1,216.63</strong> (Visa 1333)
+        <strong>Confirmation:</strong> [On file]<br>
+        <strong>Total paid:</strong> <strong style="color:var(--gold);">CA$1,216.63</strong>
       </p>
     </div>
 
@@ -447,8 +447,8 @@ export default function GridAccess() {
       </table>
 
       <p style="margin-top:1rem;text-align:center;">
-        <strong>Confirmations:</strong> FGIWDP (out) • QQRQEE (return)<br>
-        <strong>Total paid:</strong> <strong style="color:var(--gold);">US$1,133.42</strong> (MasterCard 4816)
+        <strong>Confirmations:</strong> [On file]<br>
+        <strong>Total paid:</strong> <strong style="color:var(--gold);">US$1,133.42</strong>
       </p>
     </div>
 
