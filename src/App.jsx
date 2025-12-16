@@ -2,6 +2,9 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import Hero from "./components/Hero";
 import BlurText from "./components/BlurText";
+import { HiMoon, HiSun } from "react-icons/hi2";
+import { HiInbox, HiSearch, HiChartBar, HiChatBubbleLeftRight } from "react-icons/hi2";
+import { FaBrain, FaBalanceScale } from "react-icons/fa";
 import "./index.css";
 
 export default function App() {
@@ -39,9 +42,9 @@ export default function App() {
           transition={{ type: "spring", stiffness: 500, damping: 30 }}
         >
           {isDark ? (
-            <span className="text-white text-xs">🌙</span>
+            <HiMoon className="text-white text-sm" />
           ) : (
-            <span className="text-white text-xs">☀️</span>
+            <HiSun className="text-white text-sm" />
           )}
         </motion.div>
       </button>
@@ -91,32 +94,32 @@ export default function App() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 max-w-6xl mx-auto">
           {[ 
             {
-              icon: "📥",
+              icon: <HiInbox />,
               title: "Email Integration",
               desc: "Connect securely via OAuth 2.0 and auto-pull vendor confirmations and PDF attachments.",
             },
             {
-              icon: "🔍",
+              icon: <HiSearch />,
               title: "PDF Intelligence",
               desc: "Extract item, price, and delivery data using adaptive OCR + AI-backed template detection.",
             },
             {
-              icon: "⚖️",
+              icon: <FaBalanceScale />,
               title: "Variance Detection",
               desc: "Flag overcharges, fake ship dates, or missing discounts before they contaminate your ERP.",
             },
             {
-              icon: "📊",
+              icon: <HiChartBar />,
               title: "Supplier KPI Engine",
               desc: "Track fulfillment accuracy, price behavior, and backorder rates per vendor.",
             },
             {
-              icon: "🧠",
+              icon: <FaBrain />,
               title: "Self-Learning Master",
               desc: "Terminus learns from every confirmation to strengthen your vendor baseline over time.",
             },
             {
-              icon: "💬",
+              icon: <HiChatBubbleLeftRight />,
               title: "Purchaser Power Tools",
               desc: "Question orders with one click, export proof reports, and build negotiation leverage.",
             },
@@ -133,7 +136,9 @@ export default function App() {
                   : "bg-gray-50 border border-gray-200 hover:shadow-lg"
               }`}
             >
-              <div className="text-4xl mb-4">{f.icon}</div>
+              <div className={`text-4xl mb-4 flex justify-center ${
+                isDark ? "text-[#4FC3F7]" : "text-blue-600"
+              }`}>{f.icon}</div>
               <h3
                 className={`text-2xl font-semibold mb-3 ${
                   isDark ? "text-[#4FC3F7]" : "text-blue-600"
@@ -172,17 +177,17 @@ export default function App() {
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 max-w-6xl mx-auto">
           {[
             {
-              step: "1️⃣",
+              step: 1,
               title: "Upload Vendor PDFs",
               desc: "Drop in your vendor confirmations or auto-import from your email inbox.",
             },
             {
-              step: "2️⃣",
+              step: 2,
               title: "AI Extraction & Validation",
               desc: "Our AI reads, validates, and compares pricing, quantities, and delivery dates in seconds.",
             },
             {
-              step: "3️⃣",
+              step: 3,
               title: "Instant Alerts",
               desc: "Get instant alerts for cost drifts, backorders, or mismatched part numbers.",
             },
@@ -199,7 +204,15 @@ export default function App() {
                   : "bg-gray-50 border border-gray-200"
               }`}
             >
-              <div className="text-5xl mb-4">{f.step}</div>
+              <div className="flex justify-center mb-4">
+                <div className={`w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold ${
+                  isDark 
+                    ? "bg-gradient-to-r from-[#4FC3F7] to-[#7C4DFF] text-white" 
+                    : "bg-gradient-to-r from-blue-500 to-purple-500 text-white"
+                }`}>
+                  {f.step}
+                </div>
+              </div>
               <h3
                 className={`text-2xl font-semibold mb-3 ${
                   isDark ? "text-white" : "text-gray-900"
