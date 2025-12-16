@@ -60,3 +60,4 @@ export default function Hero({ isDark = true }) {
     </section>
   );
 }
+
