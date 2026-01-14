@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
-import { EffectComposer, RenderPass, BloomEffect } from "postprocessing";
+import { EffectComposer, RenderPass, EffectPass, BloomEffect } from "postprocessing";
 import "./Hyperspeed.css";
 
 const distortions = {
@@ -11,10 +11,9 @@ const distortions = {
 
 export default function Hyperspeed({ effectOptions = {} }) {
   const containerRef = useRef(null);
-  const appRef = useRef(null);
 
   useEffect(() => {
-    const container = document.getElementById("lights");
+    const container = containerRef.current;
     if (!container) {
       return;
     }
@@ -31,35 +30,58 @@ export default function Hyperspeed({ effectOptions = {} }) {
     const color = effectOptions.color || [0.2, 0.6, 1.0];
     const intensity = effectOptions.intensity || 0.8;
 
+    // Get container dimensions
+    const getDimensions = () => {
+      // Try container first
+      if (container.clientWidth > 0 && container.clientHeight > 0) {
+        return { width: container.clientWidth, height: container.clientHeight };
+      }
+      // Fallback to parent
+      const parent = container.parentElement;
+      if (parent && parent.clientWidth > 0 && parent.clientHeight > 0) {
+        return { width: parent.clientWidth, height: parent.clientHeight };
+      }
+      // Final fallback to window
+      return { width: window.innerWidth, height: window.innerHeight };
+    };
+
+    let { width, height } = getDimensions();
+    // Ensure minimum dimensions
+    if (width === 0) width = window.innerWidth;
+    if (height === 0) height = window.innerHeight;
+
     // Initialize Three.js scene
     scene = new THREE.Scene();
-    camera = new THREE.PerspectiveCamera(
-      75,
-      container.clientWidth / container.clientHeight,
-      0.1,
-      1000
-    );
+    camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
     camera.position.z = 5;
 
     renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    renderer.setSize(container.clientWidth, container.clientHeight);
-    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setSize(width, height);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     container.appendChild(renderer.domElement);
 
-    // Create tunnel effect
+    // Create hyperspeed tunnel effect
     const geometry = new THREE.BufferGeometry();
     const vertices = [];
     const colors = [];
 
-    for (let i = 0; i < density; i++) {
-      const angle = (i / density) * Math.PI * 2;
-      const radius = 2 + (i / density) * 10;
-      const x = Math.cos(angle) * radius;
-      const y = Math.sin(angle) * radius;
-      const z = -i * 0.5;
+    // Create tunnel with multiple rings
+    const rings = 60;
+    const pointsPerRing = Math.max(8, Math.floor(density / 4));
 
-      vertices.push(x, y, z);
-      colors.push(color[0], color[1], color[2]);
+    for (let ring = 0; ring < rings; ring++) {
+      const z = -ring * 0.4;
+      const radius = 0.5 + ring * 0.12;
+      
+      for (let i = 0; i < pointsPerRing; i++) {
+        const angle = (i / pointsPerRing) * Math.PI * 2;
+        const x = Math.cos(angle) * radius;
+        const y = Math.sin(angle) * radius;
+
+        vertices.push(x, y, z);
+        const alpha = 1 - (ring / rings) * 0.8;
+        colors.push(color[0] * alpha, color[1] * alpha, color[2] * alpha);
+      }
     }
 
     geometry.setAttribute(
@@ -69,26 +91,27 @@ export default function Hyperspeed({ effectOptions = {} }) {
     geometry.setAttribute("color", new THREE.Float32BufferAttribute(colors, 3));
 
     const material = new THREE.PointsMaterial({
-      size: 0.1,
+      size: 3.0,
       vertexColors: true,
       transparent: true,
       opacity: intensity,
+      sizeAttenuation: true,
     });
 
     particles = new THREE.Points(geometry, material);
     scene.add(particles);
 
-    // Post-processing
+    // Post-processing with v6 API
     try {
       composer = new EffectComposer(renderer);
       composer.addPass(new RenderPass(scene, camera));
       const bloomEffect = new BloomEffect({
-        intensity: 1.5,
-        luminanceThreshold: 0.5,
+        intensity: 2.5,
+        luminanceThreshold: 0.3,
       });
-      composer.addEffect(bloomEffect);
+      composer.addPass(new EffectPass(camera, bloomEffect));
     } catch (e) {
-      console.warn("Postprocessing not available, using basic renderer");
+      console.warn("Postprocessing error, using basic renderer", e);
       composer = null;
     }
 
@@ -97,10 +120,10 @@ export default function Hyperspeed({ effectOptions = {} }) {
       animationId = requestAnimationFrame(animate);
 
       if (particles) {
-        particles.rotation.z += 0.001 * speed;
-        particles.position.z += 0.1 * speed;
+        particles.rotation.z += 0.003 * speed;
+        particles.position.z += 0.2 * speed;
 
-        if (particles.position.z > 5) {
+        if (particles.position.z > 15) {
           particles.position.z = 0;
         }
       }
@@ -117,18 +140,20 @@ export default function Hyperspeed({ effectOptions = {} }) {
     // Handle resize
     const handleResize = () => {
       if (!container) return;
-      camera.aspect = container.clientWidth / container.clientHeight;
+      const { width: newWidth, height: newHeight } = getDimensions();
+      
+      camera.aspect = newWidth / newHeight;
       camera.updateProjectionMatrix();
-      renderer.setSize(container.clientWidth, container.clientHeight);
+      renderer.setSize(newWidth, newHeight);
       if (composer) {
-        composer.setSize(container.clientWidth, container.clientHeight);
+        composer.setSize(newWidth, newHeight);
       }
     };
 
     window.addEventListener("resize", handleResize);
 
-    // Store cleanup function
-    const dispose = () => {
+    // Cleanup function
+    return () => {
       if (animationId) {
         cancelAnimationFrame(animationId);
       }
@@ -142,21 +167,12 @@ export default function Hyperspeed({ effectOptions = {} }) {
       }
       if (renderer) {
         renderer.dispose();
-        if (container && renderer.domElement) {
+        if (container && renderer.domElement && container.contains(renderer.domElement)) {
           container.removeChild(renderer.domElement);
         }
       }
     };
-
-    appRef.current = { dispose };
-
-    return () => {
-      if (appRef.current && appRef.current.dispose) {
-        appRef.current.dispose();
-      }
-    };
   }, [effectOptions]);
 
-  return <div id="lights" ref={containerRef} />;
+  return <div id="lights" ref={containerRef} style={{ width: "100%", height: "100%" }} />;
 }
-

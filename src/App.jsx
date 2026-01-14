@@ -2,6 +2,8 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import Hero from "./components/Hero";
 import BlurText from "./components/BlurText";
+import Hyperspeed from "./components/Hyperspeed";
+import { hyperspeedPresets } from "./components/hyperspeedPresets";
 import "./index.css";
 
 export default function App() {
@@ -12,15 +14,20 @@ export default function App() {
   };
 
   return (
-    <div
-      className={`relative overflow-hidden transition-colors duration-300 ${
-        isDark ? "bg-[#07080A] text-white" : "bg-white text-gray-900"
-      }`}
-    >
-      {/* ------------------------------ */}
-      {/* THEME TOGGLE BUTTON            */}
-      {/* ------------------------------ */}
-      <button
+    <div className="relative min-h-screen w-full overflow-hidden bg-black">
+      <div className="absolute inset-0 z-0">
+        <Hyperspeed effectOptions={hyperspeedPresets.one} />
+      </div>
+      <div className="relative z-10">
+      <div
+        className={`relative overflow-hidden transition-colors duration-300 ${
+          isDark ? "bg-[#07080A] text-white" : "bg-white text-gray-900"
+        }`}
+      >
+        {/* ------------------------------ */}
+        {/* THEME TOGGLE BUTTON            */}
+        {/* ------------------------------ */}
+        <button
         onClick={toggleTheme}
         className="fixed top-6 right-6 z-50 w-14 h-8 rounded-full p-1 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
         style={{
@@ -341,6 +348,8 @@ export default function App() {
       >
         <p>© 2025 Sproxx Inc. — Terminus: The P21 PO Sentinel.</p>
       </footer>
+      </div>
+      </div>
     </div>
   );
 }

@@ -1,14 +1,9 @@
 import { motion } from "framer-motion";
 import BlurText from "./BlurText.jsx";
-import Hyperspeed from "./Hyperspeed.jsx";
-import { hyperspeedPresets } from "./hyperspeedPresets.js";
 
 export default function Hero({ isDark = true }) {
   return (
     <section className="relative min-h-screen overflow-hidden">
-      <div className="absolute inset-0 -z-10">
-        <Hyperspeed effectOptions={hyperspeedPresets.one} />
-      </div>
       <div className="relative z-10 flex flex-col items-center justify-center text-center min-h-screen px-6 pt-28">
 
       <BlurText
