@@ -14,14 +14,16 @@ export default function App() {
   };
 
   return (
-    <div className="relative min-h-screen w-full overflow-hidden bg-black">
-      <div className="absolute inset-0 z-0">
-        <Hyperspeed effectOptions={hyperspeedPresets.one} />
+    <div className="relative min-h-screen w-full">
+      {/* Fixed Hyperspeed Background */}
+      <div className="fixed inset-0 z-0 w-screen h-screen">
+        <Hyperspeed effectOptions={hyperspeedPresets.three} />
       </div>
+      
       <div className="relative z-10">
       <div
         className={`relative overflow-hidden transition-colors duration-300 ${
-          isDark ? "bg-[#07080A] text-white" : "bg-white text-gray-900"
+          isDark ? "text-white" : "text-gray-900"
         }`}
       >
         {/* ------------------------------ */}
@@ -86,7 +88,9 @@ export default function App() {
       {/* ------------------------------ */}
       {/* FEATURES SECTION                */}
       {/* ------------------------------ */}
-      <section id="features" className="relative z-10 py-32 px-6 text-center">
+      <section id="features" className={`relative z-10 py-32 px-6 text-center ${
+        isDark ? "bg-black/80 backdrop-blur-sm" : "bg-white/90 backdrop-blur-sm"
+      }`}>
         <BlurText
           text="Supply Chain Armor With a Memory"
           delay={100}
@@ -165,7 +169,7 @@ export default function App() {
       {/* ------------------------------ */}
       <section
         className={`relative z-10 py-32 px-6 text-center ${
-          isDark ? "bg-[#0B0C10]" : "bg-white"
+          isDark ? "bg-black/80 backdrop-blur-sm" : "bg-white/90 backdrop-blur-sm"
         }`}
       >
         <BlurText
@@ -231,7 +235,7 @@ export default function App() {
       {/* ------------------------------ */}
       <section
         className={`relative z-10 py-24 px-6 text-center ${
-          isDark ? "bg-[#11131A]" : "bg-gray-50"
+          isDark ? "bg-black/80 backdrop-blur-sm" : "bg-white/90 backdrop-blur-sm"
         }`}
       >
         <BlurText
@@ -304,8 +308,8 @@ export default function App() {
       <section
         className={`relative z-10 py-28 text-center border-y ${
           isDark
-            ? "bg-gradient-to-r from-[#11131A] via-[#0B0C10] to-[#11131A] border-[#1A1C24]"
-            : "bg-gradient-to-r from-gray-100 via-gray-50 to-gray-100 border-gray-200"
+            ? "bg-black/80 backdrop-blur-sm border-[#1A1C24]"
+            : "bg-white/90 backdrop-blur-sm border-gray-200"
         }`}
       >
         <BlurText
@@ -342,8 +346,8 @@ export default function App() {
       <footer
         className={`relative z-10 border-t py-10 text-sm text-center ${
           isDark
-            ? "border-gray-800 text-gray-500"
-            : "border-gray-200 text-gray-600"
+            ? "bg-black/80 backdrop-blur-sm border-gray-800 text-gray-500"
+            : "bg-white/90 backdrop-blur-sm border-gray-200 text-gray-600"
         }`}
       >
         <p>© 2025 Sproxx Inc. — Terminus: The P21 PO Sentinel.</p>

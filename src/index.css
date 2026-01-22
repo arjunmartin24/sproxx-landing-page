@@ -4,8 +4,8 @@
 @tailwind utilities;
 
 body {
-  background-color: #ffffff;
-  color: #111111;
+  background-color: #000000;
+  color: #ffffff;
   font-family: 'Inter', sans-serif;
   overflow-x: hidden;
   scroll-behavior: smooth;
