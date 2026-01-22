@@ -333,35 +333,19 @@ const Hyperspeed = memo(({
   }, []);
 
   useEffect(() => {
-    // #region agent log
-    fetch('http://127.0.0.1:7242/ingest/5278f889-0eab-45ba-86bd-4e0b1a4da909',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Hyperspeed.jsx:335',message:'useEffect entry',data:{refExists:!!hyperspeed.current,appExists:!!appRef.current,containerChildrenBeforeCleanup:hyperspeed.current?.children?.length||0},timestamp:Date.now(),sessionId:'debug-session',runId:'post-fix',hypothesisId:'A'})}).catch(()=>{});
-    // #endregion
     
     // ALWAYS clean up all children first, regardless of appRef state
     // This handles cases where React Strict Mode or remounting clears appRef
     if (hyperspeed.current) {
-      // #region agent log
-      const beforeCleanup = hyperspeed.current.children.length;
-      const childrenList = Array.from(hyperspeed.current.children).map(c => c.tagName);
-      // #endregion
       // Remove all children using a more robust method
       const childrenArray = Array.from(hyperspeed.current.children);
       childrenArray.forEach(child => {
-        // #region agent log
-        fetch('http://127.0.0.1:7242/ingest/5278f889-0eab-45ba-86bd-4e0b1a4da909',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Hyperspeed.jsx:348',message:'Removing child',data:{childTag:child.tagName,isCanvas:child.tagName==='CANVAS'},timestamp:Date.now(),sessionId:'debug-session',runId:'post-fix',hypothesisId:'E'})}).catch(()=>{});
-        // #endregion
         hyperspeed.current.removeChild(child);
       });
-      // #region agent log
-      fetch('http://127.0.0.1:7242/ingest/5278f889-0eab-45ba-86bd-4e0b1a4da909',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Hyperspeed.jsx:355',message:'After cleanup',data:{childrenBefore:beforeCleanup,childrenAfter:hyperspeed.current.children.length,childrenRemoved:childrenList},timestamp:Date.now(),sessionId:'debug-session',runId:'post-fix',hypothesisId:'E'})}).catch(()=>{});
-      // #endregion
     }
     
     // Clean up any existing app instance
     if (appRef.current) {
-      // #region agent log
-      fetch('http://127.0.0.1:7242/ingest/5278f889-0eab-45ba-86bd-4e0b1a4da909',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Hyperspeed.jsx:361',message:'Disposing existing app',data:{appExists:true},timestamp:Date.now(),sessionId:'debug-session',runId:'post-fix',hypothesisId:'E'})}).catch(()=>{});
-      // #endregion
       appRef.current.dispose();
       appRef.current = null;
     }
@@ -848,9 +832,6 @@ const Hyperspeed = memo(({
 
     class App {
       constructor(container, options = {}) {
-        // #region agent log
-        fetch('http://127.0.0.1:7242/ingest/5278f889-0eab-45ba-86bd-4e0b1a4da909',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Hyperspeed.jsx:826',message:'App constructor entry',data:{containerExists:!!container,containerWidth:container?.offsetWidth,containerHeight:container?.offsetHeight},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'B'})}).catch(()=>{});
-        // #endregion
         this.options = options;
         if (this.options.distortion == null) {
           this.options.distortion = {
@@ -872,13 +853,7 @@ const Hyperspeed = memo(({
         this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         this.renderer.setClearColor(0x000000, 0);
         this.composer = new EffectComposer(this.renderer);
-        // #region agent log
-        fetch('http://127.0.0.1:7242/ingest/5278f889-0eab-45ba-86bd-4e0b1a4da909',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Hyperspeed.jsx:843',message:'Before appending canvas',data:{canvasExists:!!this.renderer.domElement,containerChildrenBefore:container.children.length},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'D'})}).catch(()=>{});
-        // #endregion
         container.append(this.renderer.domElement);
-        // #region agent log
-        fetch('http://127.0.0.1:7242/ingest/5278f889-0eab-45ba-86bd-4e0b1a4da909',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Hyperspeed.jsx:844',message:'After appending canvas',data:{containerChildrenAfter:container.children.length,canvasInContainer:container.contains(this.renderer.domElement)},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'D'})}).catch(()=>{});
-        // #endregion
 
         const aspect = width / height;
         this.camera = new THREE.PerspectiveCamera(
@@ -1002,9 +977,6 @@ const Hyperspeed = memo(({
       }
 
       init() {
-        // #region agent log
-        fetch('http://127.0.0.1:7242/ingest/5278f889-0eab-45ba-86bd-4e0b1a4da909',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Hyperspeed.jsx:965',message:'App init entry',data:{rendererExists:!!this.renderer,canvasExists:!!this.renderer?.domElement,sceneExists:!!this.scene},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'D'})}).catch(()=>{});
-        // #endregion
         this.initPasses();
         const options = this.options;
         this.road.init();
@@ -1019,20 +991,14 @@ const Hyperspeed = memo(({
         // Attach event listeners to the canvas element instead of container
         const canvas = this.renderer.domElement;
         
-        // #region agent log
         const canvasComputedStyle = window.getComputedStyle(canvas);
         const containerComputedStyle = this.container ? window.getComputedStyle(this.container) : null;
         const parentComputedStyle = this.container?.parentElement ? window.getComputedStyle(this.container.parentElement) : null;
-        fetch('http://127.0.0.1:7242/ingest/5278f889-0eab-45ba-86bd-4e0b1a4da909',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Hyperspeed.jsx:1020',message:'Before attaching mouse listeners',data:{canvasExists:!!canvas,containerExists:!!this.container,parentExists:!!this.container?.parentElement,canvasPointerEvents:canvasComputedStyle.pointerEvents,containerPointerEvents:containerComputedStyle?.pointerEvents,parentPointerEvents:parentComputedStyle?.pointerEvents,canvasZIndex:canvasComputedStyle.zIndex,containerZIndex:containerComputedStyle?.zIndex,parentZIndex:parentComputedStyle?.zIndex},timestamp:Date.now(),sessionId:'debug-session',runId:'mouse-debug',hypothesisId:'A'})}).catch(()=>{});
-        // #endregion
         
         // Ensure canvas can receive pointer events
         canvas.style.pointerEvents = 'auto';
         canvas.style.cursor = 'pointer';
         
-        // #region agent log
-        fetch('http://127.0.0.1:7242/ingest/5278f889-0eab-45ba-86bd-4e0b1a4da909',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Hyperspeed.jsx:1027',message:'Attaching mouse event listeners',data:{canvasStylePointerEvents:canvas.style.pointerEvents,computedPointerEvents:window.getComputedStyle(canvas).pointerEvents},timestamp:Date.now(),sessionId:'debug-session',runId:'mouse-debug',hypothesisId:'B'})}).catch(()=>{});
-        // #endregion
         
         // Add event listeners
         canvas.addEventListener('mousedown', this.onMouseDown, false);
@@ -1046,35 +1012,14 @@ const Hyperspeed = memo(({
         
         // Store canvas reference for cleanup
         this.canvas = canvas;
-        
-        // #region agent log
-        fetch('http://127.0.0.1:7242/ingest/5278f889-0eab-45ba-86bd-4e0b1a4da909',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Hyperspeed.jsx:1042',message:'Event listeners attached',data:{listenersAttached:true,canvasInDOM:document.body.contains(canvas)},timestamp:Date.now(),sessionId:'debug-session',runId:'mouse-debug',hypothesisId:'B'})}).catch(()=>{});
-        // #endregion
-        
-        // Test if canvas can receive events by adding a test click handler
-        const testHandler = (e) => {
-          // #region agent log
-          fetch('http://127.0.0.1:7242/ingest/5278f889-0eab-45ba-86bd-4e0b1a4da909',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Hyperspeed.jsx:1047',message:'Test click received on canvas',data:{eventType:e.type},timestamp:Date.now(),sessionId:'debug-session',runId:'mouse-debug',hypothesisId:'D'})}).catch(()=>{});
-          // #endregion
-        };
-        canvas.addEventListener('click', testHandler, { once: true });
 
-        // #region agent log
-        fetch('http://127.0.0.1:7242/ingest/5278f889-0eab-45ba-86bd-4e0b1a4da909',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Hyperspeed.jsx:986',message:'App init complete - starting tick',data:{disposed:this.disposed},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'D'})}).catch(()=>{});
-        // #endregion
         this.tick();
       }
 
       onMouseDown(ev) {
-        // #region agent log
-        fetch('http://127.0.0.1:7242/ingest/5278f889-0eab-45ba-86bd-4e0b1a4da909',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Hyperspeed.jsx:1052',message:'onMouseDown called',data:{eventType:ev.type,button:ev.button,clientX:ev.clientX,clientY:ev.clientY,target:ev.target?.tagName,currentTarget:ev.currentTarget?.tagName},timestamp:Date.now(),sessionId:'debug-session',runId:'mouse-debug',hypothesisId:'C'})}).catch(()=>{});
-        // #endregion
         if (this.options.onSpeedUp) this.options.onSpeedUp(ev);
         this.fovTarget = this.options.fovSpeedUp;
         this.speedUpTarget = this.options.speedUp;
-        // #region agent log
-        fetch('http://127.0.0.1:7242/ingest/5278f889-0eab-45ba-86bd-4e0b1a4da909',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Hyperspeed.jsx:1058',message:'onMouseDown state updated',data:{fovTarget:this.fovTarget,speedUpTarget:this.speedUpTarget},timestamp:Date.now(),sessionId:'debug-session',runId:'mouse-debug',hypothesisId:'C'})}).catch(()=>{});
-        // #endregion
       }
 
       onMouseUp(ev) {
@@ -1178,9 +1123,6 @@ const Hyperspeed = memo(({
 
       tick() {
         if (this.disposed || !this) {
-          // #region agent log
-          fetch('http://127.0.0.1:7242/ingest/5278f889-0eab-45ba-86bd-4e0b1a4da909',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Hyperspeed.jsx:1087',message:'Tick skipped - disposed or null',data:{disposed:this.disposed,isNull:!this},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'D'})}).catch(()=>{});
-          // #endregion
           return;
         }
         if (resizeRendererToDisplaySize(this.renderer, this.setSize)) {
@@ -1196,9 +1138,6 @@ const Hyperspeed = memo(({
     }
 
     if (!hyperspeed.current) {
-      // #region agent log
-      fetch('http://127.0.0.1:7242/ingest/5278f889-0eab-45ba-86bd-4e0b1a4da909',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Hyperspeed.jsx:1101',message:'Ref is null - early return',data:{refExists:false},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
-      // #endregion
       return () => {
         if (appRef.current) {
           appRef.current.dispose();
@@ -1207,37 +1146,22 @@ const Hyperspeed = memo(({
       };
     }
     
-    // #region agent log
     const containerEl = hyperspeed.current;
     const rect = containerEl.getBoundingClientRect();
     const computedStyle = window.getComputedStyle(containerEl);
-    fetch('http://127.0.0.1:7242/ingest/5278f889-0eab-45ba-86bd-4e0b1a4da909',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Hyperspeed.jsx:1110',message:'Before App init - container dimensions',data:{width:rect.width,height:rect.height,offsetWidth:containerEl.offsetWidth,offsetHeight:containerEl.offsetHeight,position:computedStyle.position,display:computedStyle.display,visibility:computedStyle.visibility,top:computedStyle.top,left:computedStyle.left,right:computedStyle.right,bottom:computedStyle.bottom,zIndex:computedStyle.zIndex},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});
-    // #endregion
     
     const options = { ...effectOptions };
     options.distortion = distortions[options.distortion] || distortions.turbulentDistortion;
 
-    // #region agent log
-    fetch('http://127.0.0.1:7242/ingest/5278f889-0eab-45ba-86bd-4e0b1a4da909',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Hyperspeed.jsx:1113',message:'Creating App instance',data:{distortionType:options.distortion,containerExists:!!hyperspeed.current},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'E'})}).catch(()=>{});
-    // #endregion
     const myApp = new App(hyperspeed.current, options);
     appRef.current = myApp;
     myApp.loadAssets().then(() => {
-      // #region agent log
-      fetch('http://127.0.0.1:7242/ingest/5278f889-0eab-45ba-86bd-4e0b1a4da909',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Hyperspeed.jsx:1116',message:'Assets loaded - before init',data:{disposed:myApp.disposed,containerHasChildren:hyperspeed.current?.children?.length||0},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'D'})}).catch(()=>{});
-      // #endregion
       if (!myApp.disposed) {
         myApp.init();
-        // #region agent log
-        fetch('http://127.0.0.1:7242/ingest/5278f889-0eab-45ba-86bd-4e0b1a4da909',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Hyperspeed.jsx:1118',message:'After init call',data:{canvasAppended:!!hyperspeed.current?.querySelector('canvas'),childrenCount:hyperspeed.current?.children?.length||0},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'D'})}).catch(()=>{});
-        // #endregion
       }
     });
 
     return () => {
-      // #region agent log
-      fetch('http://127.0.0.1:7242/ingest/5278f889-0eab-45ba-86bd-4e0b1a4da909',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Hyperspeed.jsx:1194',message:'Cleanup return function',data:{appExists:!!appRef.current,containerChildren:hyperspeed.current?.children?.length||0},timestamp:Date.now(),sessionId:'debug-session',runId:'post-fix',hypothesisId:'E'})}).catch(()=>{});
-      // #endregion
       if (appRef.current) {
         appRef.current.dispose();
         appRef.current = null;
@@ -1248,19 +1172,13 @@ const Hyperspeed = memo(({
           hyperspeed.current.removeChild(hyperspeed.current.firstChild);
         }
       }
-      // #region agent log
-      fetch('http://127.0.0.1:7242/ingest/5278f889-0eab-45ba-86bd-4e0b1a4da909',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Hyperspeed.jsx:1203',message:'After cleanup return',data:{containerChildren:hyperspeed.current?.children?.length||0},timestamp:Date.now(),sessionId:'debug-session',runId:'post-fix',hypothesisId:'E'})}).catch(()=>{});
-      // #endregion
     };
   }, [effectOptions]);
 
-  // #region agent log
   if (typeof window !== 'undefined') {
     setTimeout(() => {
-      fetch('http://127.0.0.1:7242/ingest/5278f889-0eab-45ba-86bd-4e0b1a4da909',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Hyperspeed.jsx:1129',message:'Component render - checking ref',data:{refExists:!!hyperspeed.current,refElement:hyperspeed.current?.tagName},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
     }, 0);
   }
-  // #endregion
   return <div className="hyperspeed-container w-full h-full" ref={hyperspeed}></div>;
 });
 
