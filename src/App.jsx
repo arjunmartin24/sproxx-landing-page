@@ -350,7 +350,7 @@ export default function App() {
             : "bg-white/90 backdrop-blur-sm border-gray-200 text-gray-600"
         }`}
       >
-        <p>© 2025 Sproxx Inc. — Terminus: The P21 PO Sentinel.</p>
+        <p>© 2026 SPROXX — Terminus: The P21 PO Sentinel.</p>
       </footer>
       </div>
       </div>
