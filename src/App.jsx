@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import BlurText from "./components/BlurText";
 import Hyperspeed from "./components/Hyperspeed";
 import { hyperspeedPresets } from "./components/hyperspeedPresets";
@@ -17,6 +17,7 @@ import "./index.css";
 
 export default function App() {
   const [isDark, setIsDark] = useState(true);
+  const shouldReduceMotion = useReducedMotion();
 
   const toggleTheme = () => {
     setIsDark(!isDark);
@@ -109,7 +110,7 @@ export default function App() {
                 SPROXX
               </motion.div>
               <div className="hidden md:flex items-center gap-8">
-                {["Services", "Pricing", "Work Samples", "FAQ", "Contact"].map(
+                {["Services", "Impact", "Pricing", "Work Samples", "FAQ", "Contact"].map(
                   (link) => (
                     <a
                       key={link}
@@ -144,34 +145,96 @@ export default function App() {
           {/* ------------------------------ */}
           <section
             id="hero"
-            className={`relative z-20 min-h-screen transition-colors duration-300 ${
+            className={`relative z-20 min-h-screen transition-colors duration-300 overflow-hidden ${
               isDark ? "bg-transparent" : "bg-white/90"
             }`}
           >
+            {/* Animated aurora blob background */}
+            {isDark && (
+              <motion.div
+                className="absolute inset-0 pointer-events-none"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 2 }}
+              >
+                <motion.div
+                  className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full blur-3xl opacity-20"
+                  style={{
+                    background: "radial-gradient(circle, rgba(124, 77, 255, 0.4) 0%, rgba(79, 195, 247, 0.2) 50%, transparent 100%)",
+                  }}
+                  animate={
+                    shouldReduceMotion
+                      ? {}
+                      : {
+                          x: [0, 100, -50, 0],
+                          y: [0, -80, 50, 0],
+                          scale: [1, 1.2, 0.9, 1],
+                          opacity: [0.2, 0.3, 0.15, 0.2],
+                        }
+                  }
+                  transition={
+                    shouldReduceMotion
+                      ? {}
+                      : {
+                          duration: 20,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                        }
+                  }
+                />
+                <motion.div
+                  className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full blur-3xl opacity-15"
+                  style={{
+                    background: "radial-gradient(circle, rgba(79, 195, 247, 0.4) 0%, rgba(0, 229, 255, 0.2) 50%, transparent 100%)",
+                  }}
+                  animate={
+                    shouldReduceMotion
+                      ? {}
+                      : {
+                          x: [0, -80, 60, 0],
+                          y: [0, 100, -40, 0],
+                          scale: [1, 0.8, 1.3, 1],
+                          opacity: [0.15, 0.25, 0.1, 0.15],
+                        }
+                  }
+                  transition={
+                    shouldReduceMotion
+                      ? {}
+                      : {
+                          duration: 25,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                        }
+                  }
+                />
+              </motion.div>
+            )}
             <div className="relative z-20 flex flex-col items-center justify-center text-center min-h-screen px-6 pt-32 pb-32">
-              <BlurText
-                text="We do the boring ops work your team hates."
-                delay={120}
-                animateBy="words"
-                direction="top"
+              <motion.h1
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2, duration: 0.8 }}
                 className="
                   text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight
                   bg-gradient-to-r from-[#7C4DFF] via-[#4FC3F7] to-[#00E5FF]
                   bg-clip-text text-transparent
-                  w-full flex justify-center mb-6 relative z-20
+                  w-full mb-6 relative z-20
+                  animate-gradient
+                  px-4
                 "
-              />
+              >
+                We handle operational work so your team can focus on what matters.
+              </motion.h1>
 
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5, duration: 1 }}
-                className={`text-lg md:text-xl max-w-3xl mt-6 leading-relaxed ${
+                className={`text-lg md:text-xl max-w-4xl mt-6 leading-relaxed px-4 ${
                   isDark ? "text-gray-300" : "text-gray-600"
                 }`}
               >
-                Excel automation, PDF extraction, cleanup, dashboards, and tiny
-                tools — delivered fast, super cheap, and done right.
+                Excel automation, PDF data extraction, reporting, and internal tools — delivered quickly, securely, and with minimal overhead.
               </motion.p>
 
               <motion.div
@@ -182,22 +245,39 @@ export default function App() {
               >
                 <a
                   href="#contact"
-                  className="px-8 py-4 bg-gradient-to-r from-[#6C63FF] to-[#4FC3F7]
+                  className="relative px-8 py-4 bg-gradient-to-r from-[#6C63FF] to-[#4FC3F7]
                              rounded-lg text-white font-semibold shadow-lg
-                             hover:shadow-[#4FC3F7]/40 transition-all hover:-translate-y-1"
+                             hover:shadow-[#4FC3F7]/40 transition-all hover:-translate-y-1
+                             animate-gradient overflow-hidden"
                 >
-                  Get a Quote
+                  {/* Animated gradient glow behind button */}
+                  <span
+                    className="absolute inset-0 bg-gradient-to-r from-[#7C4DFF] via-[#4FC3F7] to-[#00E5FF] 
+                               opacity-0 hover:opacity-20 transition-opacity duration-300
+                               animate-gradient blur-xl -z-10"
+                    style={{ filter: "blur(20px)" }}
+                  />
+                  <span className="relative z-10">Get a Quote</span>
                 </a>
 
                 <a
                   href="#services"
-                  className={`px-8 py-4 border rounded-lg font-semibold transition-all hover:-translate-y-1 ${
+                  className={`relative px-8 py-4 border rounded-lg font-semibold transition-all hover:-translate-y-1 overflow-hidden ${
                     isDark
                       ? "border-[#4FC3F7] text-[#4FC3F7] hover:bg-[#4FC3F7]/10"
                       : "border-blue-600 text-blue-600 hover:bg-blue-50"
                   }`}
                 >
-                  See Services
+                  {/* Animated gradient border glow */}
+                  <span
+                    className={`absolute inset-0 rounded-lg bg-gradient-to-r from-[#7C4DFF] via-[#4FC3F7] to-[#00E5FF] 
+                               opacity-0 hover:opacity-30 transition-opacity duration-300
+                               animate-gradient-border blur-sm -z-10 ${
+                                 isDark ? "" : "mix-blend-mode-overlay"
+                               }`}
+                    style={{ filter: "blur(8px)" }}
+                  />
+                  <span className="relative z-10">See Services</span>
                 </a>
               </motion.div>
 
@@ -282,6 +362,135 @@ export default function App() {
                   transition={{ delay: i * 0.1, duration: 0.9 }}
                 />
               ))}
+            </div>
+          </section>
+
+          {/* ------------------------------ */}
+          {/* IMPACT SECTION                 */}
+          {/* ------------------------------ */}
+          <section
+            id="impact"
+            className={`relative z-10 py-32 px-6 ${
+              isDark ? "bg-black/80 backdrop-blur-sm" : "bg-white/90 backdrop-blur-sm"
+            }`}
+          >
+            <div className="max-w-7xl mx-auto">
+              <BlurText
+                text="Common Ops Leaks — and what they typically cost"
+                delay={100}
+                animateBy="words"
+                direction="top"
+                className="text-4xl md:text-5xl font-semibold mb-4 text-center bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent"
+              />
+              <p
+                className={`text-center mb-16 max-w-3xl mx-auto ${
+                  isDark ? "text-gray-400" : "text-gray-600"
+                }`}
+              >
+                Typical ranges based on time saved, avoided rework, and reduced manual effort. Actual impact varies by volume and process.
+              </p>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto mb-12">
+                {[
+                  {
+                    title: "Manual PDF → Excel entry",
+                    whatHappens: "Teams retype confirmations, invoices, or packing slips into spreadsheets.",
+                    typicalLeak: "2–6 hours/week",
+                    impactMin: 200,
+                    impactMax: 900,
+                  },
+                  {
+                    title: "Pricing mistakes that slip through",
+                    whatHappens: "Small unit-price issues go unnoticed until margin is gone.",
+                    typicalLeak: "0.5–2% on affected orders",
+                    impactMin: 500,
+                    impactMax: 5000,
+                  },
+                  {
+                    title: "Reports rebuilt every week",
+                    whatHappens: "The same report is recreated manually from exports and emails.",
+                    typicalLeak: "1–4 hours/week",
+                    impactMin: 150,
+                    impactMax: 600,
+                  },
+                  {
+                    title: "Dirty / duplicated master data",
+                    whatHappens: "Duplicate vendors/customers/items create rework and errors downstream.",
+                    typicalLeak: "recurring cleanup + preventable mistakes",
+                    impactMin: 200,
+                    impactMax: 2000,
+                  },
+                  {
+                    title: "No visibility → last-minute fire drills",
+                    whatHappens: "Issues surface late, leading to expediting and avoidable rework.",
+                    typicalLeak: "rush effort + delays",
+                    impactMin: 300,
+                    impactMax: 3000,
+                  },
+                ].map((card, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 60 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: i * 0.1, duration: 0.8 }}
+                    viewport={{ once: true }}
+                    className={`rounded-3xl p-6 shadow-lg hover:-translate-y-2 transition-all backdrop-blur-md group ${
+                      isDark
+                        ? "bg-[#0C0E13]/80 border border-[#1A1C24] hover:border-[#4FC3F7]/50 hover:shadow-[#4FC3F7]/30"
+                        : "bg-gray-50 border border-gray-200 hover:border-blue-300 hover:shadow-lg"
+                    }`}
+                  >
+                    <h3
+                      className={`text-lg font-semibold mb-3 ${
+                        isDark ? "text-[#4FC3F7]" : "text-blue-600"
+                      }`}
+                    >
+                      {card.title}
+                    </h3>
+                    <p
+                      className={`text-sm mb-4 ${
+                        isDark ? "text-gray-400" : "text-gray-600"
+                      }`}
+                    >
+                      <span className="font-medium">What happens:</span> {card.whatHappens}
+                    </p>
+                    <div className="space-y-2 mb-4">
+                      <p
+                        className={`text-xs ${
+                          isDark ? "text-gray-500" : "text-gray-500"
+                        }`}
+                      >
+                        <span className="font-medium">Typical leak:</span> {card.typicalLeak}
+                      </p>
+                      <p
+                        className={`text-base font-bold ${
+                          isDark ? "text-white" : "text-gray-900"
+                        }`}
+                      >
+                        <span className="font-medium">Avg impact:</span> $<Counter value={card.impactMin} />–$<Counter value={card.impactMax} />/month
+                      </p>
+                    </div>
+                    <a
+                      href="#contact"
+                      className={`inline-flex items-center text-sm font-medium transition-colors ${
+                        isDark
+                          ? "text-[#4FC3F7] hover:text-[#7C4DFF]"
+                          : "text-blue-600 hover:text-blue-700"
+                      }`}
+                    >
+                      Fix this →
+                    </a>
+                  </motion.div>
+                ))}
+              </div>
+
+              <p
+                className={`text-center text-sm max-w-2xl mx-auto ${
+                  isDark ? "text-gray-500" : "text-gray-500"
+                }`}
+              >
+                These are directional estimates — we'll validate scope and expected savings before starting.
+              </p>
             </div>
           </section>
 

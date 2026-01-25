@@ -20,3 +20,57 @@ body {
     @apply text-black bg-white text-black;
   }
 }
+
+@layer utilities {
+  /* Animated gradient keyframes */
+  @keyframes gradientShift {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  /* Animated gradient utility class */
+  .animate-gradient {
+    background-size: 200% 200%;
+    animation: gradientShift 8s ease-in-out infinite;
+  }
+
+  /* Respect prefers-reduced-motion */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-gradient {
+      animation: none;
+      background-size: 100% 100%;
+    }
+  }
+
+  /* Animated gradient border glow for buttons */
+  @keyframes gradientBorder {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  .animate-gradient-border {
+    background-size: 200% 200%;
+    animation: gradientBorder 6s ease-in-out infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-gradient-border {
+      animation: none;
+      background-size: 100% 100%;
+    }
+  }
+}
