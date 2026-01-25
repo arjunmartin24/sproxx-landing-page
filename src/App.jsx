@@ -536,13 +536,13 @@ export default function App() {
             </p>
             <div className="flex justify-center gap-6 flex-wrap">
               <a
-                href="mailto:contact@sproxx.io"
+                href="mailto:Terminussentinelai@gmail.com"
                 className="px-8 py-4 bg-white text-blue-600 rounded-lg font-semibold shadow-md hover:-translate-y-1 hover:shadow-lg transition-all"
               >
                 Get a Quote
               </a>
               <a
-                href="mailto:contact@sproxx.io"
+                href="mailto:Terminussentinelai@gmail.com"
                 className="px-8 py-4 border-2 border-white text-white rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-all hover:-translate-y-1"
               >
                 Email Us
