@@ -3,6 +3,16 @@ import { motion } from "framer-motion";
 import BlurText from "./components/BlurText";
 import Hyperspeed from "./components/Hyperspeed";
 import { hyperspeedPresets } from "./components/hyperspeedPresets";
+import Counter from "./components/Counter";
+import ServiceCard from "./components/ServiceCard";
+import {
+  BarChart3,
+  Repeat2,
+  FileSpreadsheet,
+  Sparkles,
+  Mail,
+  Wrench,
+} from "lucide-react";
 import "./index.css";
 
 export default function App() {
@@ -134,11 +144,11 @@ export default function App() {
           {/* ------------------------------ */}
           <section
             id="hero"
-            className={`relative min-h-screen transition-colors duration-300 ${
+            className={`relative z-20 min-h-screen transition-colors duration-300 ${
               isDark ? "bg-transparent" : "bg-white/90"
             }`}
           >
-            <div className="relative z-10 flex flex-col items-center justify-center text-center min-h-screen px-6 pt-32 pb-20">
+            <div className="relative z-20 flex flex-col items-center justify-center text-center min-h-screen px-6 pt-32 pb-32">
               <BlurText
                 text="We do the boring ops work your team hates."
                 delay={120}
@@ -148,7 +158,7 @@ export default function App() {
                   text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight
                   bg-gradient-to-r from-[#7C4DFF] via-[#4FC3F7] to-[#00E5FF]
                   bg-clip-text text-transparent
-                  w-full flex justify-center mb-6
+                  w-full flex justify-center mb-6 relative z-20
                 "
               />
 
@@ -224,77 +234,53 @@ export default function App() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
               {[
                 {
-                  icon: "📊",
+                  Icon: BarChart3,
                   title: "Excel Cleanup & Dashboards",
                   desc: "Transform messy spreadsheets into clean, organized data with automated formatting and visual dashboards.",
                   delivery: "24–72h",
                 },
                 {
-                  icon: "🔁",
+                  Icon: Repeat2,
                   title: "Report Automation",
                   desc: "Power Query and CSV pipelines that run on schedule, pulling data and generating reports automatically.",
                   delivery: "24–72h",
                 },
                 {
-                  icon: "📄",
+                  Icon: FileSpreadsheet,
                   title: "PDF → Excel Extraction",
                   desc: "Extract structured data from PDFs into Excel format, ready for analysis and reporting.",
                   delivery: "24–72h",
                 },
                 {
-                  icon: "🧹",
+                  Icon: Sparkles,
                   title: "Data Cleanup & Deduping",
                   desc: "Remove duplicates, fix formatting errors, standardize entries, and validate data integrity.",
                   delivery: "24–72h",
                 },
                 {
-                  icon: "✉️",
+                  Icon: Mail,
                   title: "Email Templates & SOPs",
                   desc: "Vendor and customer email templates, plus standard operating procedures for your team.",
                   delivery: "24–72h",
                 },
                 {
-                  icon: "⚙️",
+                  Icon: Wrench,
                   title: "Tiny Internal Tools",
                   desc: "Simple scripts and lightweight apps that automate repetitive tasks and save hours each week.",
                   delivery: "24–72h",
                 },
               ].map((service, i) => (
-                <motion.div
+                <ServiceCard
                   key={i}
+                  Icon={service.Icon}
+                  title={service.title}
+                  desc={service.desc}
+                  delivery={service.delivery}
+                  isDark={isDark}
                   initial={{ opacity: 0, y: 80 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.1, duration: 0.9 }}
-                  viewport={{ once: true }}
-                  className={`rounded-3xl p-8 shadow-lg hover:-translate-y-2 transition-all backdrop-blur-md ${
-                    isDark
-                      ? "bg-[#0C0E13]/80 border border-[#1A1C24] hover:shadow-[#4FC3F7]/30"
-                      : "bg-gray-50 border border-gray-200 hover:shadow-lg"
-                  }`}
-                >
-                  <div className="text-5xl mb-4">{service.icon}</div>
-                  <h3
-                    className={`text-xl font-semibold mb-3 ${
-                      isDark ? "text-[#4FC3F7]" : "text-blue-600"
-                    }`}
-                  >
-                    {service.title}
-                  </h3>
-                  <p
-                    className={`text-sm mb-4 ${
-                      isDark ? "text-gray-400" : "text-gray-600"
-                    }`}
-                  >
-                    {service.desc}
-                  </p>
-                  <p
-                    className={`text-xs ${
-                      isDark ? "text-gray-500" : "text-gray-500"
-                    }`}
-                  >
-                    Typical delivery: {service.delivery}
-                  </p>
-                </motion.div>
+                />
               ))}
             </div>
           </section>
@@ -320,17 +306,23 @@ export default function App() {
               {[
                 {
                   name: "One-Time Fix",
-                  price: "$50–$150",
+                  priceStart: 50,
+                  priceEnd: 150,
+                  priceSuffix: "",
                   desc: "Perfect for one-off cleanup jobs, single report automation, or quick data extraction tasks.",
                 },
                 {
                   name: "Ops Booster",
-                  price: "$200–$500",
+                  priceStart: 200,
+                  priceEnd: 500,
+                  priceSuffix: "",
                   desc: "For larger projects like dashboard builds, multi-step automations, or complex data transformations.",
                 },
                 {
                   name: "Quiet Retainer",
-                  price: "$50–$100/mo",
+                  priceStart: 50,
+                  priceEnd: 100,
+                  priceSuffix: "/mo",
                   desc: "Ongoing support for regular tasks, maintenance, and small improvements without the hassle.",
                 },
               ].map((tier, i) => (
@@ -356,7 +348,7 @@ export default function App() {
                   <div
                     className={`text-3xl font-bold mb-4 bg-gradient-to-r from-[#4FC3F7] to-[#7C4DFF] bg-clip-text text-transparent`}
                   >
-                    {tier.price}
+                    ${tier.priceStart}–$<Counter value={tier.priceEnd} />{tier.priceSuffix}
                   </div>
                   <p
                     className={`text-base ${
