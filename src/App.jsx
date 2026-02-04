@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect, Suspense, lazy } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import BlurText from "./components/BlurText";
-import Hyperspeed from "./components/Hyperspeed";
 import { hyperspeedPresets } from "./components/hyperspeedPresets";
+
+// Lazy-load Hyperspeed to avoid blocking initial bundle
+const Hyperspeed = lazy(() => import("./components/Hyperspeed"));
 import Counter from "./components/Counter";
 import ServiceCard from "./components/ServiceCard";
+import SEO from "./components/SEO";
 import {
   BarChart3,
   Repeat2,
@@ -17,18 +20,50 @@ import "./index.css";
 
 export default function App() {
   const [isDark, setIsDark] = useState(true);
+  const [shouldLoadHyperspeed, setShouldLoadHyperspeed] = useState(false);
   const shouldReduceMotion = useReducedMotion();
+
+  // Hyperspeed lazy-load: client-only, respects reduced motion, delayed 300ms
+  useEffect(() => {
+    // Never load during prerender (window check ensures client-only)
+    if (typeof window === 'undefined') {
+      return;
+    }
+
+    // Check prefers-reduced-motion
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    
+    // If reduced motion is preferred, ensure Hyperspeed doesn't load
+    if (prefersReducedMotion || shouldReduceMotion) {
+      setShouldLoadHyperspeed(false);
+      return;
+    }
+    
+    // Delay Hyperspeed load by 300ms after mount to prioritize content paint
+    const timer = setTimeout(() => {
+      setShouldLoadHyperspeed(true);
+    }, 300);
+    
+    // Always cleanup timer
+    return () => clearTimeout(timer);
+  }, [shouldReduceMotion]);
 
   const toggleTheme = () => {
     setIsDark(!isDark);
   };
 
   return (
-    <div className="relative min-h-screen w-full">
-      {/* Fixed Hyperspeed Background */}
-      <div className="fixed inset-0 z-0 w-screen h-screen">
-        <Hyperspeed effectOptions={hyperspeedPresets.three} />
-      </div>
+    <>
+      <SEO />
+      <div className="relative min-h-screen w-full">
+        {/* Fixed Hyperspeed Background - Lazy loaded, client-only, respects reduced motion */}
+        {shouldLoadHyperspeed && (
+          <div className="fixed inset-0 z-0 w-screen h-screen">
+            <Suspense fallback={null}>
+              <Hyperspeed effectOptions={hyperspeedPresets.three} />
+            </Suspense>
+          </div>
+        )}
       
       <div className="relative z-10">
         <div
@@ -211,6 +246,7 @@ export default function App() {
             )}
             <div className="relative z-20 flex flex-col items-center justify-center text-center min-h-screen px-6 pt-32 pb-32">
               <motion.h1
+                data-testid="hero-title"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2, duration: 0.8 }}
@@ -737,13 +773,13 @@ export default function App() {
             </p>
             <div className="flex justify-center gap-6 flex-wrap">
               <a
-                href="mailto:Terminussentinelai@gmail.com"
+                href="mailto:contact.sproxx@gmail.com"
                 className="px-8 py-4 bg-white text-blue-600 rounded-lg font-semibold shadow-md hover:-translate-y-1 hover:shadow-lg transition-all"
               >
                 Get a Quote
               </a>
               <a
-                href="mailto:Terminussentinelai@gmail.com"
+                href="mailto:contact.sproxx@gmail.com"
                 className="px-8 py-4 border-2 border-white text-white rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-all hover:-translate-y-1"
               >
                 Email Us
@@ -794,5 +830,6 @@ export default function App() {
         </div>
       </div>
     </div>
+    </>
   );
 }
